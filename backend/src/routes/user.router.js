@@ -1,9 +1,8 @@
 import express from "express";
-
+import { protectRoute } from "../middleware/auth.middleware.js";
+import { getAllUsers } from "../controller/user.controller.js";
 const userRouter = express.Router();
 
-userRouter.get("/", (req, res) => {
-    res.send("Login Page");
-});
+userRouter.get("/", protectRoute, getAllUsers);
 
 export default userRouter;

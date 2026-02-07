@@ -4,12 +4,17 @@ import {
     deleteSong,
     createAlbum,
     deleteAlbum,
+    checkAdmin,
 } from "../controller/admin.controller.js";
 import { protectRoute, requireAdmin } from "../middleware/auth.middleware.js";
 const adminRouter = express.Router();
 
-adminRouter.post("/songs", protectRoute, requireAdmin, createSong);
-adminRouter.post("/albums", protectRoute, requireAdmin, createAlbum);
-adminRouter.delete("/songs/:id", protectRoute, requireAdmin, deleteSong);
-adminRouter.delete("/albums/:id", protectRoute, requireAdmin, deleteAlbum);
+//every request will first pass through these two middlewares
+adminRouter.use(protectRoute, requireAdmin);
+
+adminRouter.get("/check", checkAdmin);
+adminRouter.post("/songs", createSong);
+adminRouter.post("/albums", createAlbum);
+adminRouter.delete("/songs/:id", deleteSong);
+adminRouter.delete("/albums/:id", deleteAlbum);
 export default adminRouter;

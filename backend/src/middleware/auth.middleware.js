@@ -10,9 +10,7 @@ export const protectRoute = async (req, res, next) => {
         next();
     } catch (error) {
         console.log("Error in protectRoute:", error.message);
-        return res
-            .status(500)
-            .json({ success: false, message: "Internal server error:", error });
+        next(error);
     }
 };
 
@@ -24,19 +22,15 @@ export const requireAdmin = async (req, res, next) => {
             currentUser.primaryEmailAddress?.emailAddress;
 
         if (!isAdmin) {
-            return res
-                .status(403)
-                .json({
-                    success: false,
-                    message: "Unautherized - not an Admin",
-                });
+            return res.status(403).json({
+                success: false,
+                message: "Unautherized - not an Admin",
+            });
         }
 
         next();
     } catch (error) {
         console.log("Error in requireAdmin:", error.message);
-        return res
-            .status(500)
-            .json({ success: false, message: "Internal server error:", error });
+        next(error);
     }
 };

@@ -3,7 +3,7 @@ import { Album } from "../models/album.model.js";
 export const getAllAlbums = async (req, res, next) => {
     try {
         const albums = await Album.find();
-        res.status(200).json({ albums });
+        res.status(200).json(albums);
     } catch (error) {
         console.log("Error in getAllAlbums:", error.message);
         next(error);
@@ -19,7 +19,7 @@ export const getAlbumById = async (req, res, next) => {
                 .status(404)
                 .json({ success: false, message: "Album not found" });
         }
-        res.status(200).json({ album });
+        res.status(200).json(album);
     } catch (error) {
         console.log("Error in getAlbumById:", error.message);
         next(error);

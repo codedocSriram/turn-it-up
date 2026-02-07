@@ -40,6 +40,17 @@ app.use("/api/songs", songRouter);
 app.use("/api/albums", albumRouter);
 app.use("/api/stats", statRouter);
 
+//centralized error handling
+app.use((err, req, res, next) => {
+    res.status(500).json({
+        success: false,
+        message:
+            process.env.NODE_ENV === "production"
+                ? "Internal Server error"
+                : err.message,
+    });
+});
+
 app.listen(PORT, () => {
     connectDB();
     console.log("Server is running in PORT:", PORT);

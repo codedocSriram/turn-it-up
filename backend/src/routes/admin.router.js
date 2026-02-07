@@ -1,7 +1,8 @@
 import express from "express";
-import { getAdmin } from "../controller/admin.controller.js";
+import { createSong } from "../controller/admin.controller.js";
+import { protectRoute, requireAdmin } from "../middleware/auth.middleware.js";
 const adminRouter = express.Router();
 
-adminRouter.get("/", getAdmin);
+adminRouter.get("/", protectRoute, requireAdmin, createSong);
 
 export default adminRouter;

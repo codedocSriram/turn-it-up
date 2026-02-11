@@ -49,7 +49,7 @@ const PlayBackControls = () => {
             usePlayerStore.setState({ isPlaying: false });
         };
 
-        audio.addEventListener("timeUpdate", updateTime);
+        audio.addEventListener("timeupdate", updateTime);
         audio.addEventListener("loadedmetadata", updateDuration);
         audio.addEventListener("ended", handleEnded);
 

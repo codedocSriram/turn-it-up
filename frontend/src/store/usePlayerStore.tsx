@@ -74,7 +74,7 @@ export const usePlayerStore = create<PlayerStore>((set, get) => ({
                 isPlaying: true,
             });
         } else {
-            set({ isPlaying: false });
+            return;
         }
     },
 
@@ -90,7 +90,7 @@ export const usePlayerStore = create<PlayerStore>((set, get) => ({
                 isPlaying: true,
             });
         } else {
-            set({ isPlaying: false });
+            return;
         }
     },
 }));
